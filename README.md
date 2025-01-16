@@ -1,1 +1,1 @@
-<h1>CombustOS</h1>
+<h1 aling="center">CombustOS</h1>
