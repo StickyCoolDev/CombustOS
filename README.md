@@ -1,1 +1,2 @@
-<h1 aling="center">CombustOS</h1>
+
+<h1 style="text-align: center;">CombustOS</h1>
