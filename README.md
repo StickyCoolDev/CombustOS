@@ -8,3 +8,4 @@ to set it up just upload the **.ino** file to the arduino.
 
 ## required library's 
 1. LiquidCrystal
+2. EEPROM
