@@ -1,4 +1,3 @@
-<h1 style="text-align: center;">CombustOS</h1>
 
 ![Image](https://github.com/StickyCoolDev/CombustOS/blob/main/CombustOSLogo.png)
 
