@@ -7,6 +7,5 @@ a small and lightweight OS for the arduino nano, and easy to set up.
 
 to set it up just set some value's and upload the **.ino** file to the arduino.
 
-## required library's 
-1. LiquidCrystal
-2. EEPROM
+## required library's
+1. EEPROM
