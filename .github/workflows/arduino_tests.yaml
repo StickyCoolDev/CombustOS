@@ -32,7 +32,7 @@ jobs:
           # The ArduinoUnit library requires a special sketch to run tests.
           # This command compiles and runs the tests.
           # The output will show whether tests passed or failed.
-          arduino-cli compile --fqbn arduino:avr:nano --verbose ./arduino-nano.ino 
+          arduino-cli compile --fqbn arduino:avr:nano --verbose ./CombustOS/src/CombustOS.ino
 
       - name: Check for successful test run
         run: |
