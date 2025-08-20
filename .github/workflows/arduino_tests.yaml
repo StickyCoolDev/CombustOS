@@ -36,7 +36,8 @@ jobs:
           ls
           ls CombustOS
           pwd
-          arduino-cli compile --fqbn arduino:avr:nano --verbose ./src/CombustOS.ino
+          arduino-cli compile --fqbn arduino:avr:nano --verbose /home/runner/work/CombustOS/CombustOS/src/CombustOS.ino
+
       - name: Check for successful test run
         run: |
           # This command checks the output of the previous step.
