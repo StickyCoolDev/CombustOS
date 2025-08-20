@@ -34,8 +34,8 @@ jobs:
           # The output will show whether tests passed or failed.
           ls ..
           ls
+          ls CombustOS
           arduino-cli compile --fqbn arduino:avr:nano --verbose ./CombustOS/src/CombustOS.ino
-
       - name: Check for successful test run
         run: |
           # This command checks the output of the previous step.
