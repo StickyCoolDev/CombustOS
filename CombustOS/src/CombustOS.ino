@@ -1,35 +1,80 @@
 #include <LiquidCrystal.h>
 
-class PixelByPixel { // the name of the text user interface is pixel by pixel
-public:
-    
-    PixelByPixel(LiquidCrystal &lcd_ref) : m_Screen(&lcd_ref){};
-    void Init(unsigned short height, unsigned short width){
-        // set the passed in values to memeber variables
-        m_ScreenHeight = height;
-        m_ScreenWidth = width;
-    }; // like initrc from ncurses // it's also a separate function from the constructor as the initialisation of the liquid crystal glass is also not in its constructor
-    void Update();
-    void RenderScene(SceneData &ScreenToRender); // we will call the write , move, print on a scene class before rendering it by the TUI engine
-private:
-
-    LiquidCrystal *m_Screen; // using the screen as a reference
-
-    // variables for height and weight
-    unsigned short m_ScreenHeight; // unsigned shorts for memory
-    unsigned short m_ScreenWidth; // usage improvement
-};
-
+// Class And Util
 class SceneData {
 public:
-    SceneData();
-
-    virtual void OnRender(){
-
+  char getData(unsigned short x, unsigned short y) {
+    if (x < 16 && y < 2) {
+      return m_Data[x][y];
     }
-private:
-    char m_Data[16][2]; // set a constant value for now 
+    return ' ';
+
+  SceneData() {
+    for (int i = 0; i < 16; ++i) {
+      for (int j = 0; j < 2; ++j) {
+        m_Data[i][j] = ' ';
+      }
+    }
+  }
+  virtual void Render() {}
+
+protected:
+  char m_Data[16][2]; 
 };
 
-void setup(){}
+
+class TerminalScene : public SceneData {
+public:
+  void Render() override {
+    
+    m_Data[0][0] = 'H';
+    m_Data[1][0] = 'e';
+    m_Data[2][0] = 'l';
+    m_Data[3][0] = 'l';
+    m_Data[4][0] = 'o';
+  }
+};
+
+class PixelByPixel { 
+public:
+  PixelByPixel(LiquidCrystal &lcd_ref) : m_Screen(&lcd_ref) {};
+
+  void Init(unsigned short height, unsigned short width) {
+    m_ScreenHeight = height;
+    m_ScreenWidth = width;
+  }; 
+
+  void RenderScene(SceneData &ScreenToRender);
+
+private:
+  LiquidCrystal *m_Screen;
+  unsigned short m_ScreenHeight;
+  unsigned short m_ScreenWidth;
+};
+
+void PixelByPixel::RenderScene(SceneData &ScreenToRender) {
+  m_Screen->clear();
+
+  for (int y = 0; y < 2; ++y) {
+    for (int x = 0; x < 16; ++x) {
+      m_Screen->setCursor(x, y);
+      m_Screen->write(ScreenToRender.getData(x, y));
+    }
+  }
+}
+
+
+
+// Main Code
+LiquidCrystal lcd(2, 3, 4, 5, 6, 7);
+PixelByPixel tui(lcd);
+TerminalScene myTerminal;
+
+void setup() {
+  lcd.begin(16, 2);
+  tui.Init(2, 16);
+  myTerminal.Render();
+  tui.RenderScene(myTerminal);
+}
+
 void loop(){}
